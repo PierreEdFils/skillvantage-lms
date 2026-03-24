@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching Products - SkillVantage Enterprise</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+        
+        :root {
+            --navy: #001F3F;
+            --orange: #FF6600;
+            --light-navy: #1A3A5C;
+            --light-orange: #FF8533;
+            --cool-gray: #F8F9FA;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #001F3F 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+        
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 102, 0, 0.15);
+        }
+        
+        .feature-item {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: rgba(255, 102, 0, 0.05);
+            border-color: var(--orange);
+        }
+        
+        .pricing-tier {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-tier:hover {
+            transform: scale(1.02);
+        }
+        
+        .pricing-tier.featured {
+            border: 2px solid var(--orange);
+            transform: scale(1.05);
+        }
+        
+        .pricing-tier.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--orange);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .filter-button {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button.active {
+            background: var(--orange);
+            color: white;
+        }
+        
+        .comparison-table {
+            overflow-x: auto;
+        }
+        
+        .comparison-table table {
+            min-width: 800px;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <!-- Make logo clickable to return home -->
+                    <!-- Logo now includes image and text -->
+                    <a href="index.html" class="flex items-center space-x-2 font-display font-bold text-xl text-navy-900">
+                        <img src="resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-16 w-auto">
+                        <!--
+                        <span>SkillVantage</span> <span class="text-orange-500">Enterprise</span>
+-->
+                    </a>
+                </div>
+                
+                <!-- Navigation Items -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Dashboard</a>
+                    <a href="coaching-products.html" class="nav-item active text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Coaching Products</a>
+                    <a href="training-modules.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Learning Management System</a>
+                    <a href="coachhub.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">CoachHub</a>
+                    <a href="how-it-works.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">How It Works</a>
+                    <a href="pricing.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Pricing</a>
+                </div>
+                
+                <!-- CTA Button -->
+                <div class="flex items-center">
+                    <!-- Trigger our custom get started modal -->
+                    <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium text-sm" onclick="openGetStarted()">
+                        Get Started Free
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">
+                    Our <span class="text-orange-400">Coaching Products</span>
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                    Discover our comprehensive suite of AI-powered coaching solutions designed to accelerate 
+                    leadership development and drive measurable organizational growth.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Filter -->
+    <section class="py-8 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="filter-button active px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-orange-500 hover:text-white" data-filter="all">
+                    All Products
+                </button>
+                <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-orange-500 hover:text-white" data-filter="individual">
+                    Individual
+                </button>
+                <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-orange-500 hover:text-white" data-filter="team">
+                    Team
+                </button>
+                <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-orange-500 hover:text-white" data-filter="enterprise">
+                    Enterprise
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Grid -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="products-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- AI Coaching Platform -->
+                <div class="product-card bg-white rounded-xl shadow-lg p-8 animate-on-scroll" data-category="individual team enterprise">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-4">AI Coaching Platform</h3>
+                    <p class="text-gray-600 mb-6">Our flagship platform combining AI intelligence with human expertise for personalized coaching experiences.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            AI-powered matching & recommendations
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Real-time progress tracking
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            24/7 availability & support
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="text-2xl font-bold text-orange-500">$49</div>
+                        <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Executive Coaching -->
+                <div class="product-card bg-white rounded-xl shadow-lg p-8 animate-on-scroll" data-category="individual enterprise">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-4">Executive Coaching</h3>
+                    <p class="text-gray-600 mb-6">Premium one-on-one coaching for C-suite and senior leaders focused on strategic impact.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            World-class executive coaches
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            360° feedback & assessment
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Strategic leadership focus
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="text-2xl font-bold text-blue-600">$299</div>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Team Coaching -->
+                <div class="product-card bg-white rounded-xl shadow-lg p-8 animate-on-scroll" data-category="team enterprise">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-4">Team Coaching</h3>
+                    <p class="text-gray-600 mb-6">Transform team dynamics and collaboration with our specialized group coaching programs.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Team dynamics assessment
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Collaborative workshops
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Performance tracking
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="text-2xl font-bold text-green-600">$149</div>
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Skills Assessment -->
+                <div class="product-card bg-white rounded-xl shadow-lg p-8 animate-on-scroll" data-category="individual team enterprise">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-4">Skills Assessment</h3>
+                    <p class="text-gray-600 mb-6">Comprehensive evaluation tools to identify strengths, gaps, and development opportunities.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            360° multi-rater feedback
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            AI-powered analysis
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Personalized reports
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="text-2xl font-bold text-purple-600">$89</div>
+                        <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-medium">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Leadership Development -->
+                <div class="product-card bg-white rounded-xl shadow-lg p-8 animate-on-scroll" data-category="team enterprise">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-4">Leadership Development</h3>
+                    <p class="text-gray-600 mb-6">Comprehensive programs to build leadership capabilities at all organizational levels.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Multi-level programs
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Succession planning
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Culture transformation
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="text-2xl font-bold text-indigo-600">$199</div>
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Performance Analytics -->
+                <div class="product-card bg-white rounded-xl shadow-lg p-8 animate-on-scroll" data-category="enterprise">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-900 mb-4">Performance Analytics</h3>
+                    <p class="text-gray-600 mb-6">Advanced analytics and reporting to measure coaching impact and ROI.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Real-time dashboards
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            ROI measurement
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Predictive insights
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="text-2xl font-bold text-red-600">$399</div>
+                        <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Feature Comparison -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-display font-bold text-3xl text-gray-900 mb-4">
+                    Compare Our <span class="gradient-text">Solutions</span>
+                </h2>
+                <p class="text-lg text-gray-600">
+                    Find the perfect coaching solution for your needs
+                </p>
+            </div>
+            
+            <div class="comparison-table">
+                <table class="w-full bg-white rounded-xl shadow-lg overflow-hidden">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Features</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-orange-500">AI Coaching</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-blue-600">Executive</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-green-600">Team</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-purple-600">Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900">AI-Powered Matching</td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900">Progress Tracking</td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900">Certified Coaches</td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900">Custom Integration</td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <svg class="w-5 h-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-display font-bold text-3xl text-gray-900 mb-4">
+                    Choose Your <span class="gradient-text">Plan</span>
+                </h2>
+                <p class="text-lg text-gray-600">
+                    Flexible pricing options for every organization size
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Starter Plan -->
+                <div class="pricing-tier bg-white rounded-xl shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Starter</h3>
+                        <p class="text-gray-600 mb-4">Perfect for individuals and small teams</p>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">$49</div>
+                        <div class="text-gray-600">per user/month</div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            AI Coaching Platform Access
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Basic Progress Tracking
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Email Support
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            5 Skills Assessments
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium">
+                        Start Free Trial
+                    </button>
+                </div>
+                
+                <!-- Professional Plan -->
+                <div class="pricing-tier featured bg-white rounded-xl shadow-lg p-8">
+                    <div class="text-center mb-8 pt-8">
+                        <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Professional</h3>
+                        <p class="text-gray-600 mb-4">Ideal for growing organizations</p>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">$149</div>
+                        <div class="text-gray-600">per user/month</div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Everything in Starter
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Team Coaching Sessions
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Advanced Analytics
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Priority Support
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Unlimited Assessments
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-medium">
+                        Start Free Trial
+                    </button>
+                </div>
+                
+                <!-- Enterprise Plan -->
+                <div class="pricing-tier bg-white rounded-xl shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Enterprise</h3>
+                        <p class="text-gray-600 mb-4">For large-scale deployments</p>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">Custom</div>
+                        <div class="text-gray-600">Contact for pricing</div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Everything in Professional
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Executive Coaching
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Custom Integrations
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Dedicated Success Manager
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            SLA & Security Compliance
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 px-4 rounded-lg font-medium">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+ <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display font-bold text-2xl mb-4">
+                    SkillVantage <span class="text-orange-500">Enterprise</span>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Transforming coaching into measurable growth through AI-powered intelligence.
+                </p>
+                <div class="text-sm text-gray-500">
+                    © 2026 SkillVantage Enterprise. All rights reserved. Confidential and proprietary.
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollAnimations();
+            initProductFiltering();
+        });
+        
+        // Scroll animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [20, 0],
+                            duration: 600,
+                            easing: 'easeOutCubic'
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // Product filtering
+        function initProductFiltering() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filter = button.dataset.filter;
+                    
+                    // Filter products
+                    productCards.forEach(card => {
+                        const categories = card.dataset.category.split(' ');
+                        
+                        if (filter === 'all' || categories.includes(filter)) {
+                            card.style.display = 'block';
+                            anime({
+                                targets: card,
+                                opacity: [0, 1],
+                                scale: [0.9, 1],
+                                duration: 300,
+                                easing: 'easeOutCubic'
+                            });
+                        } else {
+                            anime({
+                                targets: card,
+                                opacity: [1, 0],
+                                scale: [1, 0.9],
+                                duration: 200,
+                                easing: 'easeInCubic',
+                                complete: () => {
+                                    card.style.display = 'none';
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        }
+    </script>
+
+    <!-- Get Started Modal -->
+    <div id="get-started-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="font-display font-bold text-2xl text-gray-900 mb-2">Get Started with SkillVantage</h3>
+                <p class="text-gray-600">Choose your path to begin your coaching journey</p>
+            </div>
+            <div class="space-y-4">
+                <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-medium">
+                    Start Free Trial
+                </button>
+                <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">
+                    Schedule Demo
+                </button>
+                <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">
+                    Contact Sales
+                </button>
+            </div>
+            <button onclick="closeModal('get-started-modal')" class="mt-6 w-full text-gray-500 hover:text-gray-700 text-sm">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Include main.js for modal functionality -->
+    <script src="main.js"></script>
+    <script>
+    // Simple modal controls for Get Started button
+    function openGetStarted() {
+        const modal = document.getElementById('get-started-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    }
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    }
+    </script>
+</body>
+</html>

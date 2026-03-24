@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Modules - SkillVantage Enterprise</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Custom Styles and Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+        :root {
+            --navy: #001F3F;
+            --orange: #FF6600;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #001F3F 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s ease;
+        }
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 100%;
+        }
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .cta-button:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 font-display font-bold text-xl text-navy">
+                        <img src="resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-16 w-auto">
+                        <!--
+                        <span>SkillVantage</span> <span class="text-orange-500">Enterprise</span>
+-->
+                    </a>
+                </div>
+                <!-- Navigation Items -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Dashboard</a>
+                    <a href="coaching-products.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Coaching Products</a>
+                    <a href="training-modules.html" class="nav-item active text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Learning Management System</a>
+                    <a href="coachhub.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">CoachHub</a>
+                    <a href="how-it-works.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">How It Works</a>
+                    <a href="pricing.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Pricing</a>
+                </div>
+                <!-- CTA Button -->
+                <div class="flex items-center">
+                    <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium text-sm" onclick="openGetStarted()">
+                        Get Started Free
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-purple-900 via-indigo-900 to-pink-900 text-center text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="font-display font-bold text-4xl md:text-5xl mb-4">Unlock Your Potential with AI‑Powered Training</h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8">
+                Explore interactive courses, hands‑on projects, and personalized recommendations to master new skills faster and drive measurable impact.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold" onclick="openGetStarted()">Get Started</button>
+                <button class="cta-button border-2 border-white text-white hover:bg-white hover:text-navy px-8 py-3 rounded-lg font-semibold" onclick="window.location.href='coaching-products.html'">Explore Products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Our Modules -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+            <h2 class="font-display font-bold text-3xl text-navy-900 mb-4">Why Choose Our Training Modules?</h2>
+            <p class="text-gray-700 max-w-2xl mx-auto">Our curated curriculum combines expert-led videos, interactive exercises, real-world projects, and AI-driven insights to deliver a best‑in‑class learning experience that scales with you.</p>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="p-6 bg-gray-50 rounded-xl shadow-sm border border-gray-200">
+                <h3 class="font-semibold text-lg text-orange-500 mb-2">Curated Curriculum</h3>
+                <p class="text-sm text-gray-700">Courses designed by industry experts and coaching professionals, ensuring relevant, up‑to‑date content.</p>
+            </div>
+            <div class="p-6 bg-gray-50 rounded-xl shadow-sm border border-gray-200">
+                <h3 class="font-semibold text-lg text-orange-500 mb-2">Interactive Learning</h3>
+                <p class="text-sm text-gray-700">Engaging videos, quizzes, and hands‑on projects help you retain knowledge and apply skills immediately.</p>
+            </div>
+            <div class="p-6 bg-gray-50 rounded-xl shadow-sm border border-gray-200">
+                <h3 class="font-semibold text-lg text-orange-500 mb-2">Real‑Time Feedback</h3>
+                <p class="text-sm text-gray-700">AI‑powered insights track your progress and deliver personalized recommendations for continuous improvement.</p>
+            </div>
+            <div class="p-6 bg-gray-50 rounded-xl shadow-sm border border-gray-200">
+                <h3 class="font-semibold text-lg text-orange-500 mb-2">Certification &amp; Badges</h3>
+                <p class="text-sm text-gray-700">Earn verifiable certificates and digital badges to showcase your achievements and share on your professional profiles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Modules -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+            <h2 class="font-display font-bold text-3xl text-navy-900 mb-4">Featured Modules</h2>
+            <p class="text-gray-700 max-w-2xl mx-auto">Select from a variety of modules designed to enhance leadership, communication, innovation, and more. Each module includes video lessons, case studies, group discussions, and practical take‑home projects.</p>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 transition transform hover:-translate-y-2">
+                <h3 class="font-display font-semibold text-xl text-navy-900 mb-2">Leadership Essentials</h3>
+                <p class="text-sm text-gray-700 mb-4">Develop core leadership competencies through experiential learning and peer feedback.</p>
+                <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm" onclick="openGetStarted()">View Module</button>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 transition transform hover:-translate-y-2">
+                <h3 class="font-display font-semibold text-xl text-navy-900 mb-2">Communication &amp; Influence</h3>
+                <p class="text-sm text-gray-700 mb-4">Master the art of clear, persuasive communication to inspire action and create alignment.</p>
+                <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm" onclick="openGetStarted()">View Module</button>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 transition transform hover:-translate-y-2">
+                <h3 class="font-display font-semibold text-xl text-navy-900 mb-2">Innovation &amp; Creativity</h3>
+                <p class="text-sm text-gray-700 mb-4">Learn to foster an innovation mindset, generate bold ideas, and lead creative initiatives.</p>
+                <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm" onclick="openGetStarted()">View Module</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display font-bold text-2xl mb-4">
+                    SkillVantage <span class="text-orange-500">Enterprise</span>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Transforming coaching into measurable growth through AI-powered intelligence.
+                </p>
+                <div class="text-sm text-gray-500">
+                    © 2026 SkillVantage Enterprise. All rights reserved. Confidential and proprietary.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Get Started Modal (Shared) -->
+    <div id="get-started-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="font-display font-bold text-2xl text-gray-900 mb-2">Get Started with SkillVantage</h3>
+                <p class="text-gray-600">Choose your path to begin your coaching journey</p>
+            </div>
+            <div class="space-y-4">
+                <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-medium">Start Free Trial</button>
+                <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">Schedule Demo</button>
+                <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">Contact Sales</button>
+            </div>
+            <button onclick="closeModal('get-started-modal')" class="mt-6 w-full text-gray-500 hover:text-gray-700 text-sm">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+    <script>
+    // Simple modal controls for Get Started button
+    function openGetStarted() {
+        const modal = document.getElementById('get-started-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    }
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    }
+    </script>
+</body>
+</html>

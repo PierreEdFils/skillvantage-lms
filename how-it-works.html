@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - SkillVantage Enterprise</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+        :root {
+            --navy: #001F3F;
+            --orange: #FF6600;
+            --light-navy: #1A3A5C;
+            --light-orange: #FF8533;
+            --cool-gray: #F8F9FA;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #001F3F 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s ease;
+        }
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 100%;
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .cta-button:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <!-- Make logo clickable to return home -->
+                    <a href="index.html" class="flex items-center space-x-2 font-display font-bold text-xl text-navy-900">
+                        <img src="resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-16 w-auto">
+                        <!--
+                        <span>SkillVantage</span> <span class="text-orange-500">Enterprise</span>
+-->
+                    </a>
+                </div>
+                <!-- Navigation Items -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Dashboard</a>
+                    <a href="coaching-products.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Coaching Products</a>
+                    <a href="training-modules.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Learning Management System</a>
+                    <a href="coachhub.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">CoachHub</a>
+                    <a href="how-it-works.html" class="nav-item active text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">How It Works</a>
+                    <a href="pricing.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Pricing</a>
+                </div>
+                <!-- CTA Button -->
+                <div class="flex items-center">
+                    <!-- Trigger our custom get started modal -->
+                    <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium text-sm" onclick="openGetStarted()">
+                        Get Started Free
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">
+                How It <span class="text-orange-400">Works</span>
+            </h1>
+            <p class="text-xl text-purple-100 mb-8 max-w-3xl mx-auto">
+                Discover the methodology behind SkillVantage’s transformative coaching.  Learn about our NOVA™ framework and see how we guide leaders through measurable growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- NOVA Framework Section -->
+    <section class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-3xl font-bold text-navy-900 mb-8 text-center">The NOVA™ Framework</h2>
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Navigate -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <h3 class="font-semibold text-xl text-orange-500 mb-2">Navigate</h3>
+                    <p class="text-sm text-gray-700">Strengthen cross-disciplinary and cross-generational leadership skills.  Chart a course through uncertainty with clarity and confidence.</p>
+                </div>
+                <!-- Own -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <h3 class="font-semibold text-xl text-orange-500 mb-2">Own</h3>
+                    <p class="text-sm text-gray-700">Embody a growth mindset.  Worry less about “owning” projects and focus on adding value.  Take responsibility for your development.</p>
+                </div>
+                <!-- Vision -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <h3 class="font-semibold text-xl text-orange-500 mb-2">Vision</h3>
+                    <p class="text-sm text-gray-700">Foster psychological safety and belonging.  Create a shared vision that empowers coachees to speak up, challenge assumptions and innovate.</p>
+                </div>
+                <!-- Align -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <h3 class="font-semibold text-xl text-orange-500 mb-2">Align</h3>
+                    <p class="text-sm text-gray-700">Empower strategic leadership focused on mission-driven innovation.  Translate technical expertise into transformational influence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coaching Roadmap Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-3xl font-bold text-navy-900 mb-8 text-center">Executive Coaching Roadmap</h2>
+            <ol class="space-y-6">
+                <li class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
+                    <h4 class="font-semibold text-lg text-navy-900 mb-1">Stakeholder Identification</h4>
+                    <p class="text-sm text-gray-700">Identify and align with key stakeholders (supervisors, peers, sponsors) to set expectations and support the coaching journey.</p>
+                </li>
+                <li class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
+                    <h4 class="font-semibold text-lg text-navy-900 mb-1">Assessment of Development Areas</h4>
+                    <p class="text-sm text-gray-700">Conduct 360° feedback, personality instruments and performance reviews to prioritise strengths and growth areas.</p>
+                </li>
+                <li class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
+                    <h4 class="font-semibold text-lg text-navy-900 mb-1">Formulation of Action Plans</h4>
+                    <p class="text-sm text-gray-700">Create SMART goals, new routines and accountability structures.  Map resources and support.</p>
+                </li>
+                <li class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
+                    <h4 class="font-semibold text-lg text-navy-900 mb-1">Communications Plan</h4>
+                    <p class="text-sm text-gray-700">Design transparent communication cadences, progress reporting and feedback loops to keep stakeholders informed.</p>
+                </li>
+                <li class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
+                    <h4 class="font-semibold text-lg text-navy-900 mb-1">Establishment of Success Metrics</h4>
+                    <p class="text-sm text-gray-700">Define baseline and target metrics, dashboards and ROI measures that align personal growth with business goals.</p>
+                </li>
+                <li class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
+                    <h4 class="font-semibold text-lg text-navy-900 mb-1">Leadership Goals & Milestones</h4>
+                    <p class="text-sm text-gray-700">Maintain momentum through tailored goals, milestone tracking and regular reviews.  Summarise growth and provide recommendations.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-12 bg-white text-center">
+        <h3 class="font-display text-2xl font-bold text-navy-900 mb-4">Ready to start your journey?</h3>
+        <p class="text-gray-700 mb-6">Get matched with a world-class coach and embark on a leadership transformation powered by AI insights.</p>
+        <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-medium" onclick="openGetStarted()">Get Started</button>
+    </section>
+
+        <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display font-bold text-2xl mb-4">
+                    SkillVantage <span class="text-orange-500">Enterprise</span>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Transforming coaching into measurable growth through AI-powered intelligence.
+                </p>
+                <div class="text-sm text-gray-500">
+                    © 2026 SkillVantage Enterprise. All rights reserved. Confidential and proprietary.
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- Get Started Modal -->
+    <div id="get-started-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="font-display font-bold text-2xl text-gray-900 mb-2">Get Started with SkillVantage</h3>
+                <p class="text-gray-600">Choose your path to begin your coaching journey</p>
+            </div>
+            <div class="space-y-4">
+                <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-medium">
+                    Start Free Trial
+                </button>
+                <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">
+                    Schedule Demo
+                </button>
+                <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">
+                    Contact Sales
+                </button>
+            </div>
+            <button onclick="closeModal('get-started-modal')" class="mt-6 w-full text-gray-500 hover:text-gray-700 text-sm">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Include main.js for modal functionality -->
+    <script src="main.js"></script>
+    <script>
+    // Simple modal controls for Get Started button
+    function openGetStarted() {
+        const modal = document.getElementById('get-started-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    }
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    }
+    </script>
+
+</body>
+</html>

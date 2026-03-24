@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - SkillVantage Enterprise</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+        :root {
+            --navy: #001F3F;
+            --orange: #FF6600;
+            --light-navy: #1A3A5C;
+            --light-orange: #FF8533;
+            --cool-gray: #F8F9FA;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #001F3F 0%, #ffffff 100%);
+            min-height: 100vh;
+        }
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s ease;
+        }
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 100%;
+        }
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <!-- Make logo clickable to return home -->
+                    <a href="index.html" class="flex items-center space-x-2 font-display font-bold text-xl text-navy-900">
+                        <img src="resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-16 w-auto">
+                        <!--
+                        <span>SkillVantage</span> <span class="text-orange-500">Enterprise</span>
+-->
+                    </a>
+                </div>
+                <!-- Navigation Items -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Dashboard</a>
+                    <a href="coaching-products.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Coaching Products</a>
+                    <a href="training-modules.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Learning Management System</a>
+                    <a href="coachhub.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">CoachHub</a>
+                    <a href="how-it-works.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">How It Works</a>
+                    <a href="pricing.html" class="nav-item active text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Pricing</a>
+                </div>
+                <!-- CTA Button -->
+                <div class="flex items-center">
+                    <!-- Trigger our custom get started modal -->
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium text-sm" onclick="openGetStarted()">
+                        Get Started Free
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">
+                Pricing & Plans
+            </h1>
+            <p class="text-xl text-purple-100 mb-8 max-w-3xl mx-auto">
+                Choose the perfect plan for your coaching journey.  Flexible options for individuals, HR leaders and small businesses.
+            </p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Individual Plan -->
+                <div class="pricing-card bg-gray-50 p-8 rounded-xl border border-gray-200 text-center">
+                    <h3 class="font-display text-2xl font-bold text-navy-900 mb-4">Individual</h3>
+                    <p class="text-4xl font-bold text-orange-500 mb-4">$49<span class="text-lg font-medium text-gray-600">/mo</span></p>
+                    <ul class="text-gray-700 mb-6 space-y-2 text-sm">
+                        <li>One-on-one coaching sessions</li>
+                        <li>Access to AI Growth Tracker</li>
+                        <li>Personalized development roadmap</li>
+                        <li>Email support & community forum</li>
+                    </ul>
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium">Choose Plan</button>
+                </div>
+
+                <!-- Employer / HR Leader Plan -->
+                <div class="pricing-card bg-gray-50 p-8 rounded-xl border-2 border-orange-500 text-center transform scale-105">
+                    <h3 class="font-display text-2xl font-bold text-navy-900 mb-4">Employer / HR Leader</h3>
+                    <p class="text-4xl font-bold text-orange-500 mb-4">$299<span class="text-lg font-medium text-gray-600">/mo</span></p>
+                    <ul class="text-gray-700 mb-6 space-y-2 text-sm">
+                        <li>Team analytics & executive dashboards</li>
+                        <li>Manager & leadership coaching</li>
+                        <li>AI-driven performance insights</li>
+                        <li>Dedicated account manager & priority support</li>
+                    </ul>
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium">Choose Plan</button>
+                </div>
+
+                <!-- Small Business Plan -->
+                <div class="pricing-card bg-gray-50 p-8 rounded-xl border border-gray-200 text-center">
+                    <h3 class="font-display text-2xl font-bold text-navy-900 mb-4">Small Business</h3>
+                    <p class="text-4xl font-bold text-orange-500 mb-4">$499<span class="text-lg font-medium text-gray-600">/mo</span></p>
+                    <ul class="text-gray-700 mb-6 space-y-2 text-sm">
+                        <li>Branded team portal & payroll integration</li>
+                        <li>Plug-and-play training modules</li>
+                        <li>Unlimited team members & coaching sessions</li>
+                        <li>Customized onboarding & quarterly strategy reviews</li>
+                    </ul>
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium">Choose Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing Section -->
+    <section class="py-12 bg-gray-50 text-center">
+        <h3 class="font-display text-2xl font-bold text-navy-900 mb-4">Not sure which plan is right for you?</h3>
+        <p class="text-gray-700 mb-6">Contact our sales team for a custom quote and enterprise solutions.</p>
+        <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-medium">Get in Touch</button>
+    </section>
+        <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display font-bold text-2xl mb-4">
+                    SkillVantage <span class="text-orange-500">Enterprise</span>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Transforming coaching into measurable growth through AI-powered intelligence.
+                </p>
+                <div class="text-sm text-gray-500">
+                    © 2026 SkillVantage Enterprise. All rights reserved. Confidential and proprietary.
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- Get Started Modal -->
+    <div id="get-started-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="font-display font-bold text-2xl text-gray-900 mb-2">Get Started with SkillVantage</h3>
+                <p class="text-gray-600">Choose your path to begin your coaching journey</p>
+            </div>
+            <div class="space-y-4">
+                <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-medium">
+                    Start Free Trial
+                </button>
+                <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">
+                    Schedule Demo
+                </button>
+                <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">
+                    Contact Sales
+                </button>
+            </div>
+            <button onclick="closeModal('get-started-modal')" class="mt-6 w-full text-gray-500 hover:text-gray-700 text-sm">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Include main.js for modal functionality -->
+    <script src="main.js"></script>
+    <script>
+    // Simple modal controls for Get Started button
+    function openGetStarted() {
+        const modal = document.getElementById('get-started-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    }
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    }
+    </script>
+
+</body>
+</html>
