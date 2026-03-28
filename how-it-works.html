@@ -28,7 +28,24 @@
         }
         .nav-item {
             position: relative;
-            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-nav-link {
+            flex-shrink: 0;
+            text-align: center;
+            line-height: 1.25;
+            white-space: normal;
+        }
+        .header-brand-mark {
+            flex-shrink: 0;
+            color: var(--orange);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
         }
         .nav-item::after {
             content: '';
@@ -67,38 +84,33 @@
 <body>
     <!-- Navigation -->
     <nav class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20 gap-6">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center min-h-24 gap-4 lg:gap-6 py-3">
                 <!-- Logo -->
                 <div class="flex items-center">
                     <!-- Make logo clickable to return home -->
-                    <a href="index.html" class="flex items-center space-x-2 font-display font-bold text-xl text-navy-900">
-                        <img src="/resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-16 w-auto">
+                    <a href="index.html" class="flex items-center space-x-2 font-display font-bold text-xl text-navy-900 shrink-0">
+                        <img src="/resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-11 lg:h-12 w-auto">
                         <!--
                         <span>SkillVantage</span> <span class="text-orange-500">Enterprise</span>
 -->
                     </a>
                 </div>
                 <!-- Navigation Items -->
-                <div class="hidden md:flex items-center gap-4 lg:gap-6">
-                    <span class="font-display font-semibold text-sm lg:text-base tracking-wide text-gray-900 whitespace-nowrap">
-                        <span>SkillVantage</span>
-                        <span class="ml-1 font-bold text-orange-500">
-                            CORE<span class="relative -top-1 text-[0.7em] align-baseline">HUB</span><span class="relative -top-2 ml-0.5 text-[0.5em]">™</span>
-                        </span>
-                    </span>
-                    <a href="index.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Dashboard</a>
-                    <a href="coaching-products.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Coaching Products</a>
-                    <a href="training-modules.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Learning Management System</a>
-                    <a href="coachhub.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">CoachHub</a>
-                    <a href="how-it-works.html" class="nav-item active text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">How It Works</a>
-                    <a href="pricing.html" class="nav-item text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Pricing</a>
+                <div class="hidden md:flex items-center justify-center gap-x-1 gap-y-2 lg:gap-x-2 xl:gap-x-3 flex-1 flex-wrap min-w-0 px-2">
+                    <span class="header-brand-mark px-3 py-2">COREHUB™</span>
+                    <a href="index.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Dashboard</a>
+                    <a href="coaching-products.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Coaching Products</a>
+                    <a href="training-modules.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Learning Management System</a>
+                    <a href="coachhub.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">CoachHub</a>
+                    <a href="how-it-works.html" class="nav-item header-nav-link active text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">How It Works</a>
+                    <a href="pricing.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Pricing</a>
                 </div>
                 <!-- CTA Button -->
-                <div class="flex items-center">
+                <div class="flex items-center shrink-0">
                     <!-- Trigger our custom get started modal -->
-                    <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium text-sm" onclick="openGetStarted()">
-                        Get Started Free
+                    <button class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-4 lg:px-5 py-2 rounded-lg font-medium text-sm whitespace-nowrap" onclick="openGetStarted()">
+                        Get Started
                     </button>
                 </div>
             </div>
