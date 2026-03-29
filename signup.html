@@ -64,10 +64,10 @@
         <div class="grid lg:grid-cols-[0.95fr,1.05fr] gap-8 items-start">
             <section class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-[2rem] p-8 text-white">
                 <p class="text-sm uppercase tracking-[0.22em] text-orange-300 font-semibold mb-4">Start Free Trial</p>
-                <h1 class="font-display text-4xl font-bold leading-tight mb-4">
+                <h1 class="font-display text-4xl font-bold leading-tight mb-4" id="signup-hero-title">
                     Create your COREHUB™ account and choose your persona.
                 </h1>
-                <p class="text-white/80 text-lg leading-8 mb-8">
+                <p class="text-white/80 text-lg leading-8 mb-8" id="signup-hero-copy">
                     Pick the experience that matches your role, then complete a short guided signup flow to launch your dashboard.
                 </p>
                 <div class="space-y-4">
@@ -76,7 +76,7 @@
                         <p class="text-white/85">Choose a persona, add your account details, define your goals, and finish setup.</p>
                     </div>
                     <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
-                        <p class="text-sm font-semibold text-orange-300 mb-2">Default trial flow</p>
+                        <p class="text-sm font-semibold text-orange-300 mb-2" id="trial-summary-label">Default trial flow</p>
                         <p class="text-white/85" id="persona-summary">Individual User selected. Personal coaching and growth setup will be used.</p>
                     </div>
                 </div>
@@ -253,11 +253,31 @@
             }
         };
 
+        const plans = {
+            starter: {
+                label: 'Starter',
+                heroTitle: 'Create your COREHUB™ Starter trial and choose your persona.',
+                heroCopy: 'You are starting the Starter plan. Pick the role-based experience that fits best, then complete the guided setup to launch your dashboard.'
+            },
+            professional: {
+                label: 'Professional',
+                heroTitle: 'Create your COREHUB™ Professional trial and choose your persona.',
+                heroCopy: 'You are starting the Professional plan. Pick the role-based experience that fits best, then complete the guided setup to launch your dashboard.'
+            },
+            enterprise: {
+                label: 'Enterprise',
+                heroTitle: 'Create your COREHUB™ Enterprise trial and choose your persona.',
+                heroCopy: 'You are starting the Enterprise plan. Pick the role-based experience that fits best, then complete the guided setup to launch your dashboard.'
+            }
+        };
+
         const params = new URLSearchParams(window.location.search);
         const personaParam = params.get('persona');
+        const planParam = params.get('plan');
         const stepParam = Number(params.get('step'));
 
         let currentPersona = profiles[personaParam] ? personaParam : 'individual';
+        const currentPlan = plans[planParam] ? planParam : null;
         let currentStep = Number.isInteger(stepParam) && stepParam >= 0 ? stepParam : 0;
 
         function renderPersonaCard(key, title, text) {
@@ -294,7 +314,20 @@
         }
 
         function updateSummary() {
-            document.getElementById('persona-summary').textContent = profiles[currentPersona].summary;
+            const personaSummary = profiles[currentPersona].summary;
+            document.getElementById('persona-summary').textContent = currentPlan
+                ? `${plans[currentPlan].label} plan selected. ${personaSummary}`
+                : personaSummary;
+        }
+
+        function updatePlanContext() {
+            if (!currentPlan) {
+                return;
+            }
+
+            document.getElementById('signup-hero-title').textContent = plans[currentPlan].heroTitle;
+            document.getElementById('signup-hero-copy').textContent = plans[currentPlan].heroCopy;
+            document.getElementById('trial-summary-label').textContent = `${plans[currentPlan].label} trial flow`;
         }
 
         function renderStep() {
@@ -347,6 +380,7 @@
             renderStep();
         });
 
+        updatePlanContext();
         updateSummary();
         renderStep();
     </script>
