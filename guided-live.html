@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillVantage Guided Live</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+        :root {
+            --ink: #0f172a;
+            --mist: #eef4ff;
+            --accent: #ff6b00;
+            --teal: #0f9d8a;
+            --gold: #f5b700;
+            --panel: rgba(255, 255, 255, 0.82);
+            --line: rgba(15, 23, 42, 0.08);
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(255, 107, 0, 0.18), transparent 28%),
+                radial-gradient(circle at top right, rgba(15, 157, 138, 0.14), transparent 24%),
+                linear-gradient(180deg, #fff8f2 0%, #edf7f6 45%, #f7fbff 100%);
+            min-height: 100vh;
+        }
+
+        .display-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .glass {
+            background: var(--panel);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+        }
+
+        .timeline-line {
+            background: linear-gradient(180deg, var(--accent), rgba(15, 157, 138, 0.55));
+        }
+
+        .step-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 50px rgba(15, 23, 42, 0.11);
+        }
+
+        .chip {
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: rgba(255, 255, 255, 0.76);
+        }
+    </style>
+</head>
+<body>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        <section class="glass rounded-[2rem] overflow-hidden mb-10">
+            <div class="grid lg:grid-cols-[1.15fr,0.85fr] gap-8 p-8 md:p-12 items-center">
+                <div>
+                    <p class="uppercase tracking-[0.28em] text-sm font-bold text-orange-500 mb-4">Guided Live</p>
+                    <h1 class="display-font text-4xl md:text-6xl font-bold leading-tight mb-5">
+                        A guided walkthrough of everything we changed on SkillVantage.
+                    </h1>
+                    <p class="text-lg text-slate-600 leading-8 max-w-3xl">
+                        This page tells the story of the website from the early branding cleanup to the split signup flows and the latest signup-page polish now powering the dashboard and coaching products experience.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-8">
+                        <a href="index.html" class="inline-flex items-center justify-center rounded-full bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 font-semibold">Open Dashboard Home</a>
+                        <a href="coaching-products.html" class="inline-flex items-center justify-center rounded-full border border-slate-300 hover:bg-white text-slate-800 px-6 py-3 font-semibold">Open Coaching Products</a>
+                        <a href="dashboard-signup.html" class="inline-flex items-center justify-center rounded-full border border-slate-300 hover:bg-white text-slate-800 px-6 py-3 font-semibold">Open User Signup</a>
+                    </div>
+                </div>
+                <div class="grid gap-4">
+                    <div class="glass rounded-[1.75rem] p-6">
+                        <p class="text-sm uppercase tracking-[0.18em] text-slate-500 mb-2">Current Structure</p>
+                        <div class="space-y-3 text-sm text-slate-700">
+                            <div class="flex items-center justify-between chip rounded-2xl px-4 py-3">
+                                <span>Dashboard journey</span>
+                                <strong>User Signup</strong>
+                            </div>
+                            <div class="flex items-center justify-between chip rounded-2xl px-4 py-3">
+                                <span>Coaching products journey</span>
+                                <strong>Plan Signup</strong>
+                            </div>
+                            <div class="flex items-center justify-between chip rounded-2xl px-4 py-3">
+                                <span>Shared site direction</span>
+                                <strong>COREHUB™ branding</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded-[1.75rem] bg-slate-950 text-white p-6">
+                        <p class="text-sm uppercase tracking-[0.18em] text-orange-300 mb-3">Latest Milestone</p>
+                        <h2 class="display-font text-2xl font-bold mb-3">Signup flows are now split cleanly.</h2>
+                        <p class="text-slate-300 leading-7">
+                            Generic “Get Started for Free” traffic goes to the dashboard user signup flow, while coaching product trial buttons now lead to a plan-based experience for Starter, Professional, and Enterprise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <div class="flex items-end justify-between gap-6 mb-6">
+                <div>
+                    <p class="uppercase tracking-[0.24em] text-sm font-bold text-teal-700 mb-2">Timeline</p>
+                    <h2 class="display-font text-3xl md:text-4xl font-bold">What changed from the beginning</h2>
+                </div>
+                <p class="text-slate-500 max-w-2xl">The walkthrough below follows the actual progression of the website based on the work we shipped together.</p>
+            </div>
+
+            <div class="relative pl-8 md:pl-12">
+                <div class="timeline-line absolute left-2 md:left-4 top-0 bottom-0 w-1 rounded-full"></div>
+
+                <div class="space-y-6">
+                    <article class="step-card glass rounded-[1.75rem] p-6 md:p-8 relative">
+                        <div class="absolute -left-[1.05rem] md:-left-[1.35rem] top-8 h-6 w-6 md:h-8 md:w-8 rounded-full bg-orange-500 border-4 border-white"></div>
+                        <p class="text-sm font-bold uppercase tracking-[0.16em] text-slate-500 mb-2">Foundation</p>
+                        <h3 class="display-font text-2xl font-bold mb-3">Brand cleanup and header refinement</h3>
+                        <p class="text-slate-600 leading-8 mb-4">
+                            We started by tightening branding consistency, fixing logo handling, and improving header spacing so the site felt more polished before larger experience changes landed.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="chip rounded-full px-3 py-1.5">Logo naming fix</span>
+                            <span class="chip rounded-full px-3 py-1.5">Header spacing</span>
+                            <span class="chip rounded-full px-3 py-1.5">COREHUB™ wordmark</span>
+                        </div>
+                    </article>
+
+                    <article class="step-card glass rounded-[1.75rem] p-6 md:p-8 relative">
+                        <div class="absolute -left-[1.05rem] md:-left-[1.35rem] top-8 h-6 w-6 md:h-8 md:w-8 rounded-full bg-teal-600 border-4 border-white"></div>
+                        <p class="text-sm font-bold uppercase tracking-[0.16em] text-slate-500 mb-2">Experience Layer</p>
+                        <h3 class="display-font text-2xl font-bold mb-3">Hero sections and dashboard storytelling were strengthened</h3>
+                        <p class="text-slate-600 leading-8 mb-4">
+                            Once the brand foundation was in place, we aligned hero banners, refreshed dashboard presentation, removed the dashboard hero image behind the blue banner, and improved the way the site introduced the product story across major pages.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="chip rounded-full px-3 py-1.5">Hero alignment</span>
+                            <span class="chip rounded-full px-3 py-1.5">Dashboard framing</span>
+                            <span class="chip rounded-full px-3 py-1.5">Visual consistency</span>
+                        </div>
+                    </article>
+
+                    <article class="step-card glass rounded-[1.75rem] p-6 md:p-8 relative">
+                        <div class="absolute -left-[1.05rem] md:-left-[1.35rem] top-8 h-6 w-6 md:h-8 md:w-8 rounded-full bg-amber-500 border-4 border-white"></div>
+                        <p class="text-sm font-bold uppercase tracking-[0.16em] text-slate-500 mb-2">Conversion Flow</p>
+                        <h3 class="display-font text-2xl font-bold mb-3">Get Started modals and signup entry points were standardized</h3>
+                        <p class="text-slate-600 leading-8 mb-4">
+                            We then unified how visitors entered the product from across the site so the calls to action felt consistent and the routing behavior became easier to reason about.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="chip rounded-full px-3 py-1.5">Shared modal pattern</span>
+                            <span class="chip rounded-full px-3 py-1.5">Clear trial CTA</span>
+                            <span class="chip rounded-full px-3 py-1.5">Cleaner navigation</span>
+                        </div>
+                    </article>
+
+                    <article class="step-card glass rounded-[1.75rem] p-6 md:p-8 relative">
+                        <div class="absolute -left-[1.05rem] md:-left-[1.35rem] top-8 h-6 w-6 md:h-8 md:w-8 rounded-full bg-slate-900 border-4 border-white"></div>
+                        <p class="text-sm font-bold uppercase tracking-[0.16em] text-slate-500 mb-2">Major Split</p>
+                        <h3 class="display-font text-2xl font-bold mb-3">User signup and coaching-plan signup now serve different journeys</h3>
+                        <p class="text-slate-600 leading-8 mb-4">
+                            The biggest architectural improvement was separating the signup experiences. The dashboard path now uses a user signup flow for Individual User, Employer / HR Leader, and Small Business, while coaching products uses a plan signup based on Starter, Professional, and Enterprise.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="chip rounded-full px-3 py-1.5">`dashboard-signup.html`</span>
+                            <span class="chip rounded-full px-3 py-1.5">`signup.html` plan flow</span>
+                            <span class="chip rounded-full px-3 py-1.5">Route separation</span>
+                        </div>
+                    </article>
+
+                    <article class="step-card glass rounded-[1.75rem] p-6 md:p-8 relative">
+                        <div class="absolute -left-[1.05rem] md:-left-[1.35rem] top-8 h-6 w-6 md:h-8 md:w-8 rounded-full bg-orange-500 border-4 border-white"></div>
+                        <p class="text-sm font-bold uppercase tracking-[0.16em] text-slate-500 mb-2">Signup Polish</p>
+                        <h3 class="display-font text-2xl font-bold mb-3">Signup pages now share the same site chrome</h3>
+                        <p class="text-slate-600 leading-8 mb-4">
+                            We finished by aligning the signup pages with the main site shell, switching the dashboard signup wording from persona language to user language, and reusing the same dashboard footer so the signup experience feels consistent end to end.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="chip rounded-full px-3 py-1.5">Shared signup header</span>
+                            <span class="chip rounded-full px-3 py-1.5">Dashboard footer reused</span>
+                            <span class="chip rounded-full px-3 py-1.5">User wording</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid lg:grid-cols-[1.05fr,0.95fr] gap-8 mb-10">
+            <div class="glass rounded-[1.75rem] p-7 md:p-8">
+                <p class="uppercase tracking-[0.24em] text-sm font-bold text-orange-500 mb-2">Live Route Map</p>
+                <h2 class="display-font text-3xl font-bold mb-5">How the current journeys work</h2>
+                <div class="space-y-4">
+                    <div class="chip rounded-[1.5rem] p-5">
+                        <p class="text-sm uppercase tracking-[0.14em] text-slate-500 mb-2">Journey 1</p>
+                        <h3 class="font-bold text-xl mb-2">Dashboard User Flow</h3>
+                        <p class="text-slate-600 leading-7 mb-4">Triggered from the general site “Get Started for Free” entry points and from the homepage persona cards.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="index.html" class="rounded-full bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 text-sm font-semibold">Open Home</a>
+                            <a href="dashboard-signup.html" class="rounded-full border border-slate-300 hover:bg-white px-4 py-2 text-sm font-semibold">Open User Signup</a>
+                        </div>
+                    </div>
+                    <div class="chip rounded-[1.5rem] p-5">
+                        <p class="text-sm uppercase tracking-[0.14em] text-slate-500 mb-2">Journey 2</p>
+                        <h3 class="font-bold text-xl mb-2">Coaching Products Plan Flow</h3>
+                        <p class="text-slate-600 leading-7 mb-4">Triggered from the Starter and Professional trial buttons on the coaching products page, with the flow now centered on organization size and plan selection.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="coaching-products.html" class="rounded-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 text-sm font-semibold">Open Coaching Products</a>
+                            <a href="signup.html?plan=starter&step=0" class="rounded-full border border-slate-300 hover:bg-white px-4 py-2 text-sm font-semibold">Open Starter Plan Signup</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass rounded-[1.75rem] p-7 md:p-8">
+                <p class="uppercase tracking-[0.24em] text-sm font-bold text-teal-700 mb-2">Commit Highlights</p>
+                <h2 class="display-font text-3xl font-bold mb-5">Recent milestones we shipped</h2>
+                <div class="space-y-4 text-sm">
+                    <div class="chip rounded-2xl p-4">
+                        <p class="font-bold text-slate-900">`b8d4480`</p>
+                        <p class="text-slate-600 mt-1">Split persona and coaching plan signup flows.</p>
+                    </div>
+                    <div class="chip rounded-2xl p-4">
+                        <p class="font-bold text-slate-900">Current local update</p>
+                        <p class="text-slate-600 mt-1">Aligned signup pages with the shared header and dashboard footer, updated dashboard signup wording to user language, and cleaned up the dashboard hero banner background.</p>
+                    </div>
+                    <div class="chip rounded-2xl p-4">
+                        <p class="font-bold text-slate-900">`82d8e60`</p>
+                        <p class="text-slate-600 mt-1">Made coaching product trials plan-specific instead of persona-based.</p>
+                    </div>
+                    <div class="chip rounded-2xl p-4">
+                        <p class="font-bold text-slate-900">`0a532db`</p>
+                        <p class="text-slate-600 mt-1">Polished signup branding and modal behavior.</p>
+                    </div>
+                    <div class="chip rounded-2xl p-4">
+                        <p class="font-bold text-slate-900">`ec8575c`</p>
+                        <p class="text-slate-600 mt-1">Standardized Get Started modals and signup links.</p>
+                    </div>
+                    <div class="chip rounded-2xl p-4">
+                        <p class="font-bold text-slate-900">`b265039` + `fbd4813`</p>
+                        <p class="text-slate-600 mt-1">Aligned hero banners and unified branding across the site.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass rounded-[2rem] p-8 md:p-10">
+            <div class="grid lg:grid-cols-[0.85fr,1.15fr] gap-8 items-start">
+                <div>
+                    <p class="uppercase tracking-[0.24em] text-sm font-bold text-orange-500 mb-2">Pages Touched</p>
+                    <h2 class="display-font text-3xl font-bold mb-4">Where the changes landed</h2>
+                    <p class="text-slate-600 leading-8">
+                        The work spans the homepage, coaching products flow, shared modals, pricing and supporting pages, plus the two dedicated signup experiences now used by the site.
+                    </p>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <a href="index.html" class="chip rounded-[1.5rem] p-5 hover:bg-white">
+                        <p class="font-bold text-lg">Home / Dashboard</p>
+                        <p class="text-slate-600 mt-2 text-sm">Persona cards and general Start Free Trial routing.</p>
+                    </a>
+                    <a href="coaching-products.html" class="chip rounded-[1.5rem] p-5 hover:bg-white">
+                        <p class="font-bold text-lg">Coaching Products</p>
+                        <p class="text-slate-600 mt-2 text-sm">Starter and Professional now route to plan-based signup.</p>
+                    </a>
+                    <a href="dashboard-signup.html" class="chip rounded-[1.5rem] p-5 hover:bg-white">
+                        <p class="font-bold text-lg">User Signup</p>
+                        <p class="text-slate-600 mt-2 text-sm">Individual User, Employer / HR Leader, and Small Business flow with shared site chrome.</p>
+                    </a>
+                    <a href="signup.html" class="chip rounded-[1.5rem] p-5 hover:bg-white">
+                        <p class="font-bold text-lg">Plan Signup</p>
+                        <p class="text-slate-600 mt-2 text-sm">Starter, Professional, and Enterprise for organization size.</p>
+                    </a>
+                    <a href="pricing.html" class="chip rounded-[1.5rem] p-5 hover:bg-white">
+                        <p class="font-bold text-lg">Pricing</p>
+                        <p class="text-slate-600 mt-2 text-sm">Standardized Start Free Trial behavior.</p>
+                    </a>
+                    <a href="coachhub.html" class="chip rounded-[1.5rem] p-5 hover:bg-white">
+                        <p class="font-bold text-lg">CoachHub + How It Works</p>
+                        <p class="text-slate-600 mt-2 text-sm">Updated modal routing for the unified user journey.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

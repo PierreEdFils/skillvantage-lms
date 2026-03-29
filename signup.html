@@ -34,6 +34,46 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        .nav-item {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-nav-link {
+            flex-shrink: 0;
+            text-align: center;
+            line-height: 1.25;
+            white-space: normal;
+        }
+
+        .header-brand-mark {
+            flex-shrink: 0;
+            color: var(--orange);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 100%;
+        }
+
         .plan-option {
             transition: all 0.25s ease;
         }
@@ -48,18 +88,35 @@
             border-color: var(--orange);
             background: rgba(255, 102, 0, 0.08);
         }
+
     </style>
 </head>
 <body class="text-gray-900">
     <div id="particle-bg"></div>
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div class="flex items-center justify-between gap-4 mb-10">
-            <a href="coaching-products.html" class="flex items-center gap-3">
-                <img src="/resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-10 w-auto">
-                <span class="font-display font-bold text-lg text-orange-500">COREHUB™</span>
-            </a>
-            <a href="coaching-products.html" class="text-white/80 hover:text-white text-sm font-medium">Back to coaching products</a>
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center min-h-24 gap-4 lg:gap-6 py-3">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 font-display font-bold text-xl text-navy-900 shrink-0">
+                        <img src="/resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-11 lg:h-12 w-auto">
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center justify-center gap-x-1 gap-y-2 lg:gap-x-2 xl:gap-x-3 flex-1 flex-wrap min-w-0 px-2">
+                    <span class="header-brand-mark px-3 py-2">COREHUB™</span>
+                    <a href="index.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium active">Dashboard</a>
+                    <a href="coaching-products.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Coaching Products</a>
+                    <a href="training-modules.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Learning Management System</a>
+                    <a href="coachhub.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">CoachHub</a>
+                    <a href="how-it-works.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">How It Works</a>
+                    <a href="pricing.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Pricing</a>
+                </div>
+
+            </div>
         </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-10">
 
         <div class="grid lg:grid-cols-[0.95fr,1.05fr] gap-8 items-start">
             <section class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-[2rem] p-8 text-white">
@@ -120,6 +177,12 @@
                     </div>
                 </form>
             </section>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+            <a href="coaching-products.html" class="bg-orange-500 hover:bg-orange-600 text-white px-4 lg:px-5 py-3 rounded-lg font-medium text-sm whitespace-nowrap">
+                Back to Coaching Products
+            </a>
         </div>
     </main>
 
