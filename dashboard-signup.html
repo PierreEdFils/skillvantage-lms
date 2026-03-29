@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillVantage Coaching Plan Sign Up</title>
+    <title>SkillVantage Persona Signup</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
     <style>
@@ -34,11 +34,11 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .plan-option {
+        .persona-option {
             transition: all 0.25s ease;
         }
 
-        .plan-option.active {
+        .persona-option.active {
             border-color: var(--orange);
             box-shadow: 0 18px 40px rgba(255, 102, 0, 0.16);
             transform: translateY(-2px);
@@ -54,30 +54,30 @@
     <div id="particle-bg"></div>
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div class="flex items-center justify-between gap-4 mb-10">
-            <a href="coaching-products.html" class="flex items-center gap-3">
+            <a href="index.html" class="flex items-center gap-3">
                 <img src="/resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-10 w-auto">
                 <span class="font-display font-bold text-lg text-orange-500">COREHUB™</span>
             </a>
-            <a href="coaching-products.html" class="text-white/80 hover:text-white text-sm font-medium">Back to coaching products</a>
+            <a href="index.html" class="text-white/80 hover:text-white text-sm font-medium">Back to site</a>
         </div>
 
         <div class="grid lg:grid-cols-[0.95fr,1.05fr] gap-8 items-start">
             <section class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-[2rem] p-8 text-white">
-                <p class="text-sm uppercase tracking-[0.22em] text-orange-300 font-semibold mb-4">Start Free Trial</p>
-                <h1 class="font-display text-4xl font-bold leading-tight mb-4" id="signup-hero-title">
-                    Create your COREHUB™ Starter trial and choose your plan.
+                <p class="text-sm uppercase tracking-[0.22em] text-orange-300 font-semibold mb-4">Get Started for Free</p>
+                <h1 class="font-display text-4xl font-bold leading-tight mb-4">
+                    Create your persona signup account.
                 </h1>
-                <p class="text-white/80 text-lg leading-8 mb-8" id="signup-hero-copy">
-                    Pick the coaching products plan that matches your organization size, then complete a short guided signup flow.
+                <p class="text-white/80 text-lg leading-8 mb-8">
+                    Launch the experience that fits your role, then complete a short persona signup flow for Individual User, Employer / HR Leader, or Small Business.
                 </p>
                 <div class="space-y-4">
                     <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
                         <p class="text-sm font-semibold text-orange-300 mb-2">What happens next</p>
-                        <p class="text-white/85">Choose a plan, add your account details, define your rollout goals, and finish setup.</p>
+                        <p class="text-white/85">Pick a persona, create the account, add your first goals, and open the personalized experience built for that role.</p>
                     </div>
                     <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
-                        <p class="text-sm font-semibold text-orange-300 mb-2" id="trial-summary-label">Starter trial flow</p>
-                        <p class="text-white/85" id="plan-summary">Starter plan selected. Coaching access for individuals and small teams will be used.</p>
+                        <p class="text-sm font-semibold text-orange-300 mb-2">Current persona signup flow</p>
+                        <p class="text-white/85" id="persona-summary">Individual User selected. Personal coaching and growth setup will be used.</p>
                     </div>
                 </div>
             </section>
@@ -86,7 +86,7 @@
                 <div class="grid md:grid-cols-4 gap-3 mb-8" id="signup-progress">
                     <div class="signup-step active border border-gray-200 rounded-2xl p-4">
                         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-orange-500 mb-1">Step 1</p>
-                        <p class="font-semibold">Plan</p>
+                        <p class="font-semibold">Persona</p>
                     </div>
                     <div class="signup-step border border-gray-200 rounded-2xl p-4">
                         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400 mb-1">Step 2</p>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="signup-step border border-gray-200 rounded-2xl p-4">
                         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400 mb-1">Step 3</p>
-                        <p class="font-semibold">Organization</p>
+                        <p class="font-semibold">Goals</p>
                     </div>
                     <div class="signup-step border border-gray-200 rounded-2xl p-4">
                         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400 mb-1">Step 4</p>
@@ -103,9 +103,9 @@
                 </div>
 
                 <div id="signup-step-title" class="mb-6">
-                    <p class="text-sm uppercase tracking-[0.18em] text-orange-500 font-semibold mb-2">Plan Setup</p>
-                    <h2 class="font-display text-3xl font-bold">Choose your plan</h2>
-                    <p class="text-gray-600 mt-2">This will tailor the signup flow to your organization size and rollout needs.</p>
+                    <p class="text-sm uppercase tracking-[0.18em] text-orange-500 font-semibold mb-2">Persona Signup</p>
+                    <h2 class="font-display text-3xl font-bold">Create your persona</h2>
+                    <p class="text-gray-600 mt-2">This will personalize the signup flow for Individual User, Employer / HR Leader, or Small Business.</p>
                 </div>
 
                 <form id="signup-form" class="space-y-6">
@@ -124,81 +124,77 @@
     </main>
 
     <script>
-        const plans = {
-            starter: {
-                label: 'Starter',
-                summary: 'Starter plan selected. Coaching access for individuals and small teams will be used.',
-                heroTitle: 'Create your COREHUB™ Starter trial and choose your plan.',
-                heroCopy: 'You are starting the Starter plan for smaller organizations. Complete the guided setup to launch your coaching products trial.',
+        const profiles = {
+            individual: {
+                label: 'Individual User',
+                summary: 'Individual User selected. Personal coaching and growth setup will be used.',
                 steps: [
                     {
-                        title: 'Choose your plan',
-                        subtitle: 'Select the coaching products plan that fits your organization size.',
+                        title: 'Create your persona',
+                        subtitle: 'Select the persona signup experience you want to launch.',
                         render: () => `
                             <div class="grid md:grid-cols-3 gap-4">
-                                ${renderPlanCard('starter', 'Starter', 'For individuals and small teams starting with core coaching tools.')}
-                                ${renderPlanCard('professional', 'Professional', 'For growing organizations that need team coaching and deeper analytics.')}
-                                ${renderPlanCard('enterprise', 'Enterprise', 'For larger organizations that need executive support and custom integrations.')}
+                                ${renderPersonaCard('individual', 'Individual User', 'Personal coaching, career growth, and AI guidance.')}
+                                ${renderPersonaCard('employer', 'Employer / HR Leader', 'Team leadership, analytics, and workforce development.')}
+                                ${renderPersonaCard('business', 'Small Business', 'Affordable coaching culture and modular team growth.')}
                             </div>
                         `
                     },
                     {
                         title: 'Create your account',
-                        subtitle: 'Enter the admin details for your coaching products workspace.',
+                        subtitle: 'Enter the personal details for your login.',
                         render: () => renderFields([
-                            ['Admin name', 'text', 'Alex Morgan'],
-                            ['Work email', 'email', 'alex@example.com'],
+                            ['Full name', 'text', 'Alex Morgan'],
+                            ['Email address', 'email', 'alex@example.com'],
                             ['Password', 'password', 'Create a password'],
-                            ['Organization name', 'text', 'BrightPath Studio']
+                            ['Career stage', 'text', 'Mid Career']
                         ])
                     },
                     {
-                        title: 'Set your rollout goals',
-                        subtitle: 'Choose the first outcomes you want this plan to support.',
+                        title: 'Set your goals',
+                        subtitle: 'Choose the first outcomes you want to focus on.',
                         render: () => renderFields([
-                            ['Organization size', 'text', '1-25 employees'],
-                            ['Primary rollout goal', 'text', 'Leadership growth'],
+                            ['Primary goal', 'text', 'Leadership growth'],
                             ['Preferred coaching format', 'text', '1-on-1 coaching'],
-                            ['Launch timeline', 'text', 'This month']
+                            ['Top skill to build', 'text', 'Executive communication'],
+                            ['Session cadence', 'text', 'Biweekly']
                         ])
                     },
                     {
-                        title: 'Finish your trial setup',
-                        subtitle: 'Review the Starter experience you are about to launch.',
-                        render: () => renderFinish('Starter', 'Starter Plan', 'AI coaching platform access, basic progress tracking, email support, and skills assessments for a small rollout.')
+                        title: 'Finish your persona signup',
+                        subtitle: 'Review the experience you are about to launch.',
+                        render: () => renderFinish('Individual User', 'Personal Growth Experience', 'Personalized coaching recommendations, growth metrics, and a starter learning path.')
                     }
                 ]
             },
-            professional: {
-                label: 'Professional',
-                summary: 'Professional plan selected. Team coaching and advanced analytics setup will be used.',
-                heroTitle: 'Create your COREHUB™ Professional trial and choose your plan.',
-                heroCopy: 'You are starting the Professional plan for growing organizations. Complete the guided setup to launch your coaching products trial.',
+            employer: {
+                label: 'Employer / HR Leader',
+                summary: 'Employer / HR Leader selected. Team leadership and analytics setup will be used.',
                 steps: [
                     {
-                        title: 'Choose your plan',
-                        subtitle: 'Select the coaching products plan that fits your organization size.',
+                        title: 'Create your persona',
+                        subtitle: 'Select the persona signup experience you want to launch.',
                         render: () => `
                             <div class="grid md:grid-cols-3 gap-4">
-                                ${renderPlanCard('starter', 'Starter', 'For individuals and small teams starting with core coaching tools.')}
-                                ${renderPlanCard('professional', 'Professional', 'For growing organizations that need team coaching and deeper analytics.')}
-                                ${renderPlanCard('enterprise', 'Enterprise', 'For larger organizations that need executive support and custom integrations.')}
+                                ${renderPersonaCard('individual', 'Individual User', 'Personal coaching, career growth, and AI guidance.')}
+                                ${renderPersonaCard('employer', 'Employer / HR Leader', 'Team leadership, analytics, and workforce development.')}
+                                ${renderPersonaCard('business', 'Small Business', 'Affordable coaching culture and modular team growth.')}
                             </div>
                         `
                     },
                     {
-                        title: 'Create your account',
-                        subtitle: 'Set up the plan owner login for your organization.',
+                        title: 'Create the HR leader account',
+                        subtitle: 'Set up the program owner login.',
                         render: () => renderFields([
-                            ['Admin name', 'text', 'Jordan Taylor'],
+                            ['Full name', 'text', 'Jordan Taylor'],
                             ['Work email', 'email', 'jordan@company.com'],
                             ['Password', 'password', 'Create a password'],
                             ['Job title', 'text', 'VP of People']
                         ])
                     },
                     {
-                        title: 'Add organization and outcome details',
-                        subtitle: 'Define how the Professional plan will be used.',
+                        title: 'Add company and outcome details',
+                        subtitle: 'Define the leadership program you want to launch.',
                         render: () => renderFields([
                             ['Company name', 'text', 'Acme Corp'],
                             ['Team size', 'text', '201-500'],
@@ -207,69 +203,67 @@
                         ])
                     },
                     {
-                        title: 'Finish your trial setup',
-                        subtitle: 'Review the Professional experience you are about to launch.',
-                        render: () => renderFinish('Professional', 'Professional Plan', 'Everything in Starter plus team coaching sessions, advanced analytics, priority support, and unlimited assessments.')
+                        title: 'Finish your persona signup',
+                        subtitle: 'Review the experience you are about to launch.',
+                        render: () => renderFinish('Employer / HR Leader', 'Team Leadership Experience', 'Leadership cohort setup, analytics, AI-driven recommendations, and outcome reporting.')
                     }
                 ]
             },
-            enterprise: {
-                label: 'Enterprise',
-                summary: 'Enterprise plan selected. Enterprise-scale coaching and custom rollout support will be used.',
-                heroTitle: 'Create your COREHUB™ Enterprise trial and choose your plan.',
-                heroCopy: 'You are starting the Enterprise plan for larger organizations. Complete the guided setup to launch your coaching products trial.',
+            business: {
+                label: 'Small Business',
+                summary: 'Small Business selected. Team coaching and practical growth setup will be used.',
                 steps: [
                     {
-                        title: 'Choose your plan',
-                        subtitle: 'Select the coaching products plan that fits your organization size.',
+                        title: 'Create your persona',
+                        subtitle: 'Select the persona signup experience you want to launch.',
                         render: () => `
                             <div class="grid md:grid-cols-3 gap-4">
-                                ${renderPlanCard('starter', 'Starter', 'For individuals and small teams starting with core coaching tools.')}
-                                ${renderPlanCard('professional', 'Professional', 'For growing organizations that need team coaching and deeper analytics.')}
-                                ${renderPlanCard('enterprise', 'Enterprise', 'For larger organizations that need executive support and custom integrations.')}
+                                ${renderPersonaCard('individual', 'Individual User', 'Personal coaching, career growth, and AI guidance.')}
+                                ${renderPersonaCard('employer', 'Employer / HR Leader', 'Team leadership, analytics, and workforce development.')}
+                                ${renderPersonaCard('business', 'Small Business', 'Affordable coaching culture and modular team growth.')}
                             </div>
                         `
                     },
                     {
-                        title: 'Create your account',
-                        subtitle: 'Set up the executive owner login for your enterprise rollout.',
+                        title: 'Create the business owner account',
+                        subtitle: 'Set up the main admin for your workspace.',
                         render: () => renderFields([
-                            ['Executive sponsor', 'text', 'Casey Reed'],
+                            ['Full name', 'text', 'Casey Reed'],
                             ['Business email', 'email', 'casey@business.com'],
                             ['Password', 'password', 'Create a password'],
-                            ['Business role', 'text', 'Chief People Officer']
+                            ['Business role', 'text', 'Owner']
                         ])
                     },
                     {
-                        title: 'Add enterprise rollout details',
-                        subtitle: 'Choose the first focus for your enterprise coaching program.',
+                        title: 'Add business rollout details',
+                        subtitle: 'Choose the first focus for your coaching culture.',
                         render: () => renderFields([
-                            ['Organization name', 'text', 'NorthStar Global'],
-                            ['Number of employees', 'text', '1000+'],
-                            ['Top program priority', 'text', 'Executive leadership'],
-                            ['Integration needs', 'text', 'HRIS and analytics']
+                            ['Business name', 'text', 'BrightPath Studio'],
+                            ['Number of employees', 'text', '11-25'],
+                            ['Top team priority', 'text', 'Communication'],
+                            ['Budget range', 'text', 'Growth']
                         ])
                     },
                     {
-                        title: 'Finish your trial setup',
-                        subtitle: 'Review the Enterprise experience you are about to launch.',
-                        render: () => renderFinish('Enterprise', 'Enterprise Plan', 'Everything in Professional plus executive coaching, custom integrations, strategic reporting, and enterprise rollout support.')
+                        title: 'Finish your persona signup',
+                        subtitle: 'Review the experience you are about to launch.',
+                        render: () => renderFinish('Small Business', 'Business Growth Experience', 'Team adoption metrics, coaching starter tools, and plug-and-play learning support.')
                     }
                 ]
             }
         };
 
         const params = new URLSearchParams(window.location.search);
-        const planParam = params.get('plan');
+        const personaParam = params.get('persona');
         const stepParam = Number(params.get('step'));
 
-        let currentPlan = plans[planParam] ? planParam : 'starter';
+        let currentPersona = profiles[personaParam] ? personaParam : 'individual';
         let currentStep = Number.isInteger(stepParam) && stepParam >= 0 ? stepParam : 0;
 
-        function renderPlanCard(key, title, text) {
-            const active = currentPlan === key ? 'active border-orange-500' : 'border-gray-200';
+        function renderPersonaCard(key, title, text) {
+            const active = currentPersona === key ? 'active border-orange-500' : 'border-gray-200';
             return `
-                <button type="button" class="plan-option ${active} border rounded-2xl p-5 text-left bg-white shadow-sm" data-plan="${key}">
+                <button type="button" class="persona-option ${active} border rounded-2xl p-5 text-left bg-white shadow-sm" data-persona="${key}">
                     <p class="text-sm font-semibold uppercase tracking-[0.16em] text-orange-500 mb-3">${title}</p>
                     <p class="text-gray-600 text-sm leading-6">${text}</p>
                 </button>
@@ -289,10 +283,10 @@
             `;
         }
 
-        function renderFinish(plan, experience, details) {
+        function renderFinish(persona, experience, details) {
             return `
                 <div class="rounded-3xl bg-gray-50 border border-gray-200 p-6">
-                    <p class="text-sm font-semibold uppercase tracking-[0.16em] text-orange-500 mb-2">${plan}</p>
+                    <p class="text-sm font-semibold uppercase tracking-[0.16em] text-orange-500 mb-2">${persona}</p>
                     <h3 class="font-display text-2xl font-bold mb-3">${experience}</h3>
                     <p class="text-gray-600 leading-7">${details}</p>
                 </div>
@@ -300,24 +294,17 @@
         }
 
         function updateSummary() {
-            document.getElementById('plan-summary').textContent = plans[currentPlan].summary;
-        }
-
-        function updatePlanContext() {
-            document.getElementById('signup-hero-title').textContent = plans[currentPlan].heroTitle;
-            document.getElementById('signup-hero-copy').textContent = plans[currentPlan].heroCopy;
-            document.getElementById('trial-summary-label').textContent = `${plans[currentPlan].label} trial flow`;
+            document.getElementById('persona-summary').textContent = profiles[currentPersona].summary;
         }
 
         function renderStep() {
-            const plan = plans[currentPlan];
-            if (currentStep >= plan.steps.length) {
-                currentStep = plan.steps.length - 1;
+            const profile = profiles[currentPersona];
+            if (currentStep >= profile.steps.length) {
+                currentStep = profile.steps.length - 1;
             }
-
-            const step = plan.steps[currentStep];
+            const step = profile.steps[currentStep];
             document.getElementById('signup-step-title').innerHTML = `
-                <p class="text-sm uppercase tracking-[0.18em] text-orange-500 font-semibold mb-2">${plan.label}</p>
+                <p class="text-sm uppercase tracking-[0.18em] text-orange-500 font-semibold mb-2">${profile.label}</p>
                 <h2 class="font-display text-3xl font-bold">${step.title}</h2>
                 <p class="text-gray-600 mt-2">${step.subtitle}</p>
             `;
@@ -327,13 +314,12 @@
                 item.classList.toggle('active', index === currentStep);
             });
 
-            document.getElementById('signup-back').textContent = currentStep === 0 ? 'Back to coaching products' : 'Back';
-            document.getElementById('signup-next').textContent = currentStep === plan.steps.length - 1 ? 'Create Account' : 'Next Step';
+            document.getElementById('signup-back').textContent = currentStep === 0 ? 'Back to site' : 'Back';
+            document.getElementById('signup-next').textContent = currentStep === profile.steps.length - 1 ? 'Create Account' : 'Next Step';
 
-            document.querySelectorAll('[data-plan]').forEach((button) => {
+            document.querySelectorAll('[data-persona]').forEach((button) => {
                 button.addEventListener('click', () => {
-                    currentPlan = button.dataset.plan;
-                    updatePlanContext();
+                    currentPersona = button.dataset.persona;
                     updateSummary();
                     renderStep();
                 });
@@ -341,9 +327,9 @@
         }
 
         document.getElementById('signup-next').addEventListener('click', () => {
-            const plan = plans[currentPlan];
-            if (currentStep >= plan.steps.length - 1) {
-                window.location.href = 'coaching-products.html';
+            const profile = profiles[currentPersona];
+            if (currentStep >= profile.steps.length - 1) {
+                window.location.href = 'index.html';
                 return;
             }
 
@@ -353,7 +339,7 @@
 
         document.getElementById('signup-back').addEventListener('click', () => {
             if (currentStep === 0) {
-                window.location.href = 'coaching-products.html';
+                window.location.href = 'index.html';
                 return;
             }
 
@@ -361,7 +347,6 @@
             renderStep();
         });
 
-        updatePlanContext();
         updateSummary();
         renderStep();
     </script>
