@@ -63,6 +63,21 @@
         .persona-card:hover {
             transform: translateY(-8px) rotateY(5deg);
         }
+
+        .persona-card.active {
+            border-color: var(--orange);
+            box-shadow: 0 18px 40px rgba(255, 102, 0, 0.18);
+        }
+
+        .persona-chip {
+            transition: all 0.25s ease;
+        }
+
+        .persona-chip.active {
+            background: var(--orange);
+            color: white;
+            border-color: var(--orange);
+        }
         
         .progress-ring {
             transform: rotate(-90deg);
@@ -134,6 +149,55 @@
         .recommendation-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 25px rgba(255, 102, 0, 0.15);
+        }
+
+        .demo-step {
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .demo-step.active {
+            border-color: var(--orange);
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.12), rgba(0, 31, 63, 0.04));
+            box-shadow: 0 14px 30px rgba(0, 31, 63, 0.08);
+        }
+
+        .demo-step-index {
+            transition: all 0.25s ease;
+        }
+
+        .demo-step.active .demo-step-index {
+            background: var(--orange);
+            color: white;
+        }
+
+        .corehub-panel {
+            background:
+                radial-gradient(circle at top left, rgba(255, 102, 0, 0.18), transparent 38%),
+                radial-gradient(circle at bottom right, rgba(26, 58, 92, 0.22), transparent 42%),
+                linear-gradient(135deg, #001f3f 0%, #173a5d 55%, #f8f9fa 100%);
+        }
+
+        .corehub-node {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .corehub-node:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px rgba(0, 31, 63, 0.12);
+        }
+
+        .demo-live-panel {
+            background: linear-gradient(160deg, #0a2141 0%, #173a5d 55%, #f3f5f7 160%);
+        }
+
+        .walkthrough-step {
+            transition: all 0.25s ease;
+        }
+
+        .walkthrough-step.active {
+            border-color: var(--orange);
+            background: rgba(255, 102, 0, 0.08);
         }
         
         .chart-container {
@@ -268,7 +332,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- User Persona Selection -->
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -283,7 +347,7 @@
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Individual User -->
-                <div class="persona-card bg-white rounded-xl shadow-lg p-8 border border-gray-200 cursor-pointer" data-persona="individual">
+                <div class="persona-card active bg-white rounded-xl shadow-lg p-8 border border-gray-200 cursor-pointer" data-persona="individual">
                     <div class="text-center">
                         <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -297,8 +361,8 @@
                             <p>• Career path mapping</p>
                             <p>• AI growth tracker</p>
                         </div>
-                        <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg font-medium">
-                            Explore Personal Coaching
+                        <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg font-medium" data-start-persona="individual" type="button" onclick="window.location.href='signup.html?persona=individual&step=1'">
+                            Create Individual User
                         </button>
                     </div>
                 </div>
@@ -318,8 +382,8 @@
                             <p>• Executive dashboards</p>
                             <p>• AI-driven insights</p>
                         </div>
-                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium">
-                            Empower Your Teams
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium" data-start-persona="employer" type="button" onclick="window.location.href='signup.html?persona=employer&step=1'">
+                            Create HR Leader User
                         </button>
                     </div>
                 </div>
@@ -339,15 +403,15 @@
                             <p>• Plug-and-play modules</p>
                             <p>• Payroll integration</p>
                         </div>
-                        <button class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium">
-                            Start for Free
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium" data-start-persona="business" type="button" onclick="window.location.href='signup.html?persona=business&step=1'">
+                            Create Business User
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <!-- Dashboard Section -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -424,13 +488,93 @@
                 <!-- Progress Chart -->
                 <div class="bg-white rounded-xl shadow-lg p-6 animate-on-scroll">
                     <h3 class="font-display font-semibold text-lg text-gray-900 mb-4">Coaching Progress</h3>
-                    <div id="progress-chart" class="chart-container"></div>
+                    <div class="space-y-4 mt-4">
+                        <div class="recommendation-card bg-orange-50 border border-orange-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">75% Program Completed</h4>
+                                    <p class="text-sm text-gray-600">You have finished most of the current coaching plan and are on track for your next review.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10m-11 9h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v11a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">12 Sessions Completed</h4>
+                                    <p class="text-sm text-gray-600">A strong coaching rhythm is established, with consistent sessions supporting momentum.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card bg-green-50 border border-green-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">4 of 5 Milestones Achieved</h4>
+                                    <p class="text-sm text-gray-600">Only one milestone remains before this coaching cycle is fully completed.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Analytics Chart -->
                 <div class="bg-white rounded-xl shadow-lg p-6 animate-on-scroll">
                     <h3 class="font-display font-semibold text-lg text-gray-900 mb-4">Performance Analytics</h3>
-                    <div id="analytics-chart" class="chart-container"></div>
+                    <div class="space-y-4 mt-4">
+                        <div class="recommendation-card bg-orange-50 border border-orange-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l4-4 4 4 6-6"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">+27% Growth Over 6 Months</h4>
+                                    <p class="text-sm text-gray-600">Recent coaching and learning activity is translating into measurable performance lift.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">92 Momentum Score</h4>
+                                    <p class="text-sm text-gray-600">Performance momentum is high, showing strong consistency and sustained engagement.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card bg-purple-50 border border-purple-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">6 Straight Months Improving</h4>
+                                    <p class="text-sm text-gray-600">The trend line continues upward with no recent regression in outcomes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -439,13 +583,53 @@
                 <!-- Skills Assessment -->
                 <div class="bg-white rounded-xl shadow-lg p-6 animate-on-scroll">
                     <h3 class="font-display font-semibold text-lg text-gray-900 mb-4">Skills Assessment</h3>
-                    <div id="skills-radar" class="chart-container"></div>
+                    <div class="space-y-4 mt-4">
+                        <div class="recommendation-card bg-green-50 border border-green-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17l3-3 3 3m0-10l-3 3-3-3"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Top Skill: Strategy at 92</h4>
+                                    <p class="text-sm text-gray-600">Strategic thinking is currently the strongest capability in the assessment profile.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card bg-orange-50 border border-orange-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Focus Area: Communication at 78</h4>
+                                    <p class="text-sm text-gray-600">Communication shows the most upside and is the best next target for development.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 11V7m0 4H7m4 0h4m6 1a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Average Score: 86</h4>
+                                    <p class="text-sm text-gray-600">Overall capability strength remains high across the full assessed skill set.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- AI Recommendations -->
                 <div class="bg-white rounded-xl shadow-lg p-6 animate-on-scroll">
                     <h3 class="font-display font-semibold text-lg text-gray-900 mb-4">AI-Powered Recommendations</h3>
-                    <div class="space-y-4">
+                    <div id="recommendations-container" class="space-y-4">
                         <div class="recommendation-card bg-orange-50 border border-orange-200 rounded-lg p-4" data-recommendation="leadership-workshop">
                             <div class="flex items-start">
                                 <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 mt-1">
@@ -710,7 +894,7 @@
     </footer>
     
     <!-- Get Started Modal -->
-    <div id="get-started-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div id="get-started-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
         <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
             <div class="text-center mb-6">
                 <h3 class="font-display font-bold text-2xl text-gray-900 mb-2">Get Started with SkillVantage</h3>
@@ -718,7 +902,7 @@
             </div>
             
             <div class="space-y-4">
-                <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-medium">
+                <button class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg font-medium" onclick="window.location.href='signup.html'">
                     Start Free Trial
                 </button>
                 <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-4 rounded-lg font-medium">
@@ -732,6 +916,45 @@
             <button onclick="closeModal('get-started-modal')" class="mt-6 w-full text-gray-500 hover:text-gray-700 text-sm">
                 Close
             </button>
+        </div>
+    </div>
+
+    <div id="persona-onboarding-modal" class="modal fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-3xl w-full mx-4 shadow-2xl">
+            <div class="flex items-start justify-between gap-4 mb-6">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500 mb-2" id="onboarding-persona-label">Individual User Setup</p>
+                    <h3 class="font-display font-bold text-3xl text-gray-900 mb-2" id="onboarding-step-title">Create your account</h3>
+                    <p class="text-gray-600 max-w-2xl" id="onboarding-step-copy">Complete each step to create a persona-based user profile.</p>
+                </div>
+                <button onclick="closeModal('persona-onboarding-modal')" class="text-gray-400 hover:text-gray-700 text-sm font-semibold">Close</button>
+            </div>
+            <div id="onboarding-progress" class="grid md:grid-cols-4 gap-3 mb-6">
+                <div class="walkthrough-step active border border-gray-200 rounded-2xl p-4">
+                    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-orange-500 mb-1">Step 1</p>
+                    <p class="font-semibold text-gray-900">Account</p>
+                </div>
+            </div>
+            <form id="persona-onboarding-form" class="space-y-5">
+                <div id="onboarding-fields" class="grid md:grid-cols-2 gap-4">
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Full name</span>
+                        <input class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900" type="text" name="fullName" placeholder="Alex Morgan">
+                    </label>
+                </div>
+                <div class="rounded-2xl bg-gray-50 border border-gray-200 p-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-500 mb-2">Current Step Goal</p>
+                    <p id="onboarding-step-goal" class="text-gray-900 font-medium leading-7">Capture the basic account details needed to create the user.</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button id="onboarding-back" type="button" class="border border-gray-300 hover:bg-gray-50 text-gray-700 px-5 py-3 rounded-xl font-semibold text-sm">
+                        Back
+                    </button>
+                    <button id="onboarding-next" type="button" class="cta-button bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-xl font-semibold text-sm">
+                        Next Step
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     

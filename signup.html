@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillVantage Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+
+        :root {
+            --navy: #001f3f;
+            --orange: #ff6600;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #001f3f 0%, #f8f9fa 100%);
+            min-height: 100vh;
+        }
+
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .persona-option {
+            transition: all 0.25s ease;
+        }
+
+        .persona-option.active {
+            border-color: var(--orange);
+            box-shadow: 0 18px 40px rgba(255, 102, 0, 0.16);
+            transform: translateY(-2px);
+        }
+
+        .signup-step.active {
+            border-color: var(--orange);
+            background: rgba(255, 102, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="text-gray-900">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="flex items-center justify-between gap-4 mb-10">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="/resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-10 w-auto">
+                <span class="font-display font-bold text-lg text-white">COREHUB™</span>
+            </a>
+            <a href="index.html" class="text-white/80 hover:text-white text-sm font-medium">Back to site</a>
+        </div>
+
+        <div class="grid lg:grid-cols-[0.95fr,1.05fr] gap-8 items-start">
+            <section class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-[2rem] p-8 text-white">
+                <p class="text-sm uppercase tracking-[0.22em] text-orange-300 font-semibold mb-4">Start Free Trial</p>
+                <h1 class="font-display text-4xl font-bold leading-tight mb-4">
+                    Create your SkillVantage account and choose your persona.
+                </h1>
+                <p class="text-white/80 text-lg leading-8 mb-8">
+                    Pick the experience that matches your role, then complete a short guided signup flow to launch your dashboard.
+                </p>
+                <div class="space-y-4">
+                    <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
+                        <p class="text-sm font-semibold text-orange-300 mb-2">What happens next</p>
+                        <p class="text-white/85">Choose a persona, add your account details, define your goals, and finish setup.</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
+                        <p class="text-sm font-semibold text-orange-300 mb-2">Default trial flow</p>
+                        <p class="text-white/85" id="persona-summary">Individual User selected. Personal coaching and growth setup will be used.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-[2rem] shadow-2xl p-8">
+                <div class="grid md:grid-cols-4 gap-3 mb-8" id="signup-progress">
+                    <div class="signup-step active border border-gray-200 rounded-2xl p-4">
+                        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-orange-500 mb-1">Step 1</p>
+                        <p class="font-semibold">Persona</p>
+                    </div>
+                    <div class="signup-step border border-gray-200 rounded-2xl p-4">
+                        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400 mb-1">Step 2</p>
+                        <p class="font-semibold">Account</p>
+                    </div>
+                    <div class="signup-step border border-gray-200 rounded-2xl p-4">
+                        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400 mb-1">Step 3</p>
+                        <p class="font-semibold">Goals</p>
+                    </div>
+                    <div class="signup-step border border-gray-200 rounded-2xl p-4">
+                        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400 mb-1">Step 4</p>
+                        <p class="font-semibold">Finish</p>
+                    </div>
+                </div>
+
+                <div id="signup-step-title" class="mb-6">
+                    <p class="text-sm uppercase tracking-[0.18em] text-orange-500 font-semibold mb-2">Persona Setup</p>
+                    <h2 class="font-display text-3xl font-bold">Choose your persona</h2>
+                    <p class="text-gray-600 mt-2">This will personalize the setup flow and your starting dashboard.</p>
+                </div>
+
+                <form id="signup-form" class="space-y-6">
+                    <div id="signup-step-content"></div>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button id="signup-back" type="button" class="border border-gray-300 hover:bg-gray-50 text-gray-700 px-5 py-3 rounded-xl font-semibold text-sm">
+                            Back
+                        </button>
+                        <button id="signup-next" type="button" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-xl font-semibold text-sm">
+                            Next Step
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const profiles = {
+            individual: {
+                label: 'Individual User',
+                summary: 'Individual User selected. Personal coaching and growth setup will be used.',
+                steps: [
+                    {
+                        title: 'Choose your persona',
+                        subtitle: 'Select the experience you want to launch.',
+                        render: () => `
+                            <div class="grid md:grid-cols-3 gap-4">
+                                ${renderPersonaCard('individual', 'Individual User', 'Personal coaching, career growth, and AI guidance.')}
+                                ${renderPersonaCard('employer', 'Employer / HR Leader', 'Team leadership, analytics, and workforce development.')}
+                                ${renderPersonaCard('business', 'Small Business', 'Affordable coaching culture and modular team growth.')}
+                            </div>
+                        `
+                    },
+                    {
+                        title: 'Create your account',
+                        subtitle: 'Enter the personal details for your login.',
+                        render: () => renderFields([
+                            ['Full name', 'text', 'Alex Morgan'],
+                            ['Email address', 'email', 'alex@example.com'],
+                            ['Password', 'password', 'Create a password'],
+                            ['Career stage', 'text', 'Mid Career']
+                        ])
+                    },
+                    {
+                        title: 'Set your goals',
+                        subtitle: 'Choose the first outcomes you want to focus on.',
+                        render: () => renderFields([
+                            ['Primary goal', 'text', 'Leadership growth'],
+                            ['Preferred coaching format', 'text', '1-on-1 coaching'],
+                            ['Top skill to build', 'text', 'Executive communication'],
+                            ['Session cadence', 'text', 'Biweekly']
+                        ])
+                    },
+                    {
+                        title: 'Finish your trial setup',
+                        subtitle: 'Review the experience you are about to launch.',
+                        render: () => renderFinish('Individual User', 'Personal Growth Dashboard', 'Personalized coaching recommendations, growth metrics, and a starter learning path.')
+                    }
+                ]
+            },
+            employer: {
+                label: 'Employer / HR Leader',
+                summary: 'Employer / HR Leader selected. Team leadership and analytics setup will be used.',
+                steps: [
+                    {
+                        title: 'Choose your persona',
+                        subtitle: 'Select the experience you want to launch.',
+                        render: () => `
+                            <div class="grid md:grid-cols-3 gap-4">
+                                ${renderPersonaCard('individual', 'Individual User', 'Personal coaching, career growth, and AI guidance.')}
+                                ${renderPersonaCard('employer', 'Employer / HR Leader', 'Team leadership, analytics, and workforce development.')}
+                                ${renderPersonaCard('business', 'Small Business', 'Affordable coaching culture and modular team growth.')}
+                            </div>
+                        `
+                    },
+                    {
+                        title: 'Create the HR leader account',
+                        subtitle: 'Set up the program owner login.',
+                        render: () => renderFields([
+                            ['Full name', 'text', 'Jordan Taylor'],
+                            ['Work email', 'email', 'jordan@company.com'],
+                            ['Password', 'password', 'Create a password'],
+                            ['Job title', 'text', 'VP of People']
+                        ])
+                    },
+                    {
+                        title: 'Add company and outcome details',
+                        subtitle: 'Define the leadership program you want to launch.',
+                        render: () => renderFields([
+                            ['Company name', 'text', 'Acme Corp'],
+                            ['Team size', 'text', '201-500'],
+                            ['Program type', 'text', 'Manager development'],
+                            ['Primary business goal', 'text', 'Leadership readiness']
+                        ])
+                    },
+                    {
+                        title: 'Finish your trial setup',
+                        subtitle: 'Review the experience you are about to launch.',
+                        render: () => renderFinish('Employer / HR Leader', 'Team Leadership Dashboard', 'Leadership cohort setup, analytics, AI-driven recommendations, and outcome reporting.')
+                    }
+                ]
+            },
+            business: {
+                label: 'Small Business',
+                summary: 'Small Business selected. Team coaching and practical growth setup will be used.',
+                steps: [
+                    {
+                        title: 'Choose your persona',
+                        subtitle: 'Select the experience you want to launch.',
+                        render: () => `
+                            <div class="grid md:grid-cols-3 gap-4">
+                                ${renderPersonaCard('individual', 'Individual User', 'Personal coaching, career growth, and AI guidance.')}
+                                ${renderPersonaCard('employer', 'Employer / HR Leader', 'Team leadership, analytics, and workforce development.')}
+                                ${renderPersonaCard('business', 'Small Business', 'Affordable coaching culture and modular team growth.')}
+                            </div>
+                        `
+                    },
+                    {
+                        title: 'Create the business owner account',
+                        subtitle: 'Set up the main admin for your workspace.',
+                        render: () => renderFields([
+                            ['Full name', 'text', 'Casey Reed'],
+                            ['Business email', 'email', 'casey@business.com'],
+                            ['Password', 'password', 'Create a password'],
+                            ['Business role', 'text', 'Owner']
+                        ])
+                    },
+                    {
+                        title: 'Add business rollout details',
+                        subtitle: 'Choose the first focus for your coaching culture.',
+                        render: () => renderFields([
+                            ['Business name', 'text', 'BrightPath Studio'],
+                            ['Number of employees', 'text', '11-25'],
+                            ['Top team priority', 'text', 'Communication'],
+                            ['Budget range', 'text', 'Growth']
+                        ])
+                    },
+                    {
+                        title: 'Finish your trial setup',
+                        subtitle: 'Review the experience you are about to launch.',
+                        render: () => renderFinish('Small Business', 'Business Growth Dashboard', 'Team adoption metrics, coaching starter tools, and plug-and-play learning support.')
+                    }
+                ]
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const personaParam = params.get('persona');
+        const stepParam = Number(params.get('step'));
+
+        let currentPersona = profiles[personaParam] ? personaParam : 'individual';
+        let currentStep = Number.isInteger(stepParam) && stepParam >= 0 ? stepParam : 0;
+
+        function renderPersonaCard(key, title, text) {
+            const active = currentPersona === key ? 'active border-orange-500' : 'border-gray-200';
+            return `
+                <button type="button" class="persona-option ${active} border rounded-2xl p-5 text-left bg-white shadow-sm" data-persona="${key}">
+                    <p class="text-sm font-semibold uppercase tracking-[0.16em] text-orange-500 mb-3">${title}</p>
+                    <p class="text-gray-600 text-sm leading-6">${text}</p>
+                </button>
+            `;
+        }
+
+        function renderFields(fields) {
+            return `
+                <div class="grid md:grid-cols-2 gap-4">
+                    ${fields.map(([label, type, placeholder]) => `
+                        <label class="block">
+                            <span class="text-sm font-medium text-gray-700">${label}</span>
+                            <input class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900" type="${type}" placeholder="${placeholder}">
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderFinish(persona, dashboard, details) {
+            return `
+                <div class="rounded-3xl bg-gray-50 border border-gray-200 p-6">
+                    <p class="text-sm font-semibold uppercase tracking-[0.16em] text-orange-500 mb-2">${persona}</p>
+                    <h3 class="font-display text-2xl font-bold mb-3">${dashboard}</h3>
+                    <p class="text-gray-600 leading-7">${details}</p>
+                </div>
+            `;
+        }
+
+        function updateSummary() {
+            document.getElementById('persona-summary').textContent = profiles[currentPersona].summary;
+        }
+
+        function renderStep() {
+            const profile = profiles[currentPersona];
+            if (currentStep >= profile.steps.length) {
+                currentStep = profile.steps.length - 1;
+            }
+            const step = profile.steps[currentStep];
+            document.getElementById('signup-step-title').innerHTML = `
+                <p class="text-sm uppercase tracking-[0.18em] text-orange-500 font-semibold mb-2">${profile.label}</p>
+                <h2 class="font-display text-3xl font-bold">${step.title}</h2>
+                <p class="text-gray-600 mt-2">${step.subtitle}</p>
+            `;
+            document.getElementById('signup-step-content').innerHTML = step.render();
+
+            document.querySelectorAll('#signup-progress .signup-step').forEach((item, index) => {
+                item.classList.toggle('active', index === currentStep);
+            });
+
+            document.getElementById('signup-back').textContent = currentStep === 0 ? 'Back to site' : 'Back';
+            document.getElementById('signup-next').textContent = currentStep === profile.steps.length - 1 ? 'Create Account' : 'Next Step';
+
+            document.querySelectorAll('[data-persona]').forEach(button => {
+                button.addEventListener('click', () => {
+                    currentPersona = button.dataset.persona;
+                    updateSummary();
+                    renderStep();
+                });
+            });
+        }
+
+        document.getElementById('signup-next').addEventListener('click', () => {
+            const profile = profiles[currentPersona];
+            if (currentStep >= profile.steps.length - 1) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            currentStep += 1;
+            renderStep();
+        });
+
+        document.getElementById('signup-back').addEventListener('click', () => {
+            if (currentStep === 0) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            currentStep -= 1;
+            renderStep();
+        });
+
+        updateSummary();
+        renderStep();
+    </script>
+</body>
+</html>
