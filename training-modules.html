@@ -7,6 +7,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <!-- Custom Styles and Fonts -->
     <style>
@@ -20,8 +21,20 @@
             background: linear-gradient(135deg, #001F3F 0%, #ffffff 100%);
             min-height: 100vh;
         }
+        #particle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
         .font-display {
             font-family: 'Poppins', sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.9) 0%, rgba(255, 255, 255, 0.1) 100%);
         }
         .nav-item {
             position: relative;
@@ -80,6 +93,7 @@
     </style>
 </head>
 <body>
+    <div id="particle-bg"></div>
     <!-- Navigation Bar -->
     <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
         <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,7 +128,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-16 bg-gradient-to-br from-purple-900 via-indigo-900 to-pink-900 text-center text-white">
+    <section class="hero-section pt-32 pb-16 text-center text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="font-display font-bold text-4xl md:text-5xl mb-4">Unlock Your Potential with AI‑Powered Training</h1>
             <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8">
@@ -182,14 +196,14 @@
     <footer class="bg-navy-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <div class="font-display font-bold text-2xl mb-4">
-                    SkillVantage <span class="text-orange-500">Enterprise</span>
+                <div class="font-display font-bold text-2xl mb-4 text-orange-500">
+                    COREHUB™
                 </div>
                 <p class="text-gray-400 mb-6">
                     Transforming coaching into measurable growth through AI-powered intelligence.
                 </p>
                 <div class="text-sm text-gray-500">
-                    © 2026 SkillVantage Enterprise. All rights reserved. Confidential and proprietary.
+                    © 2026 COREHUB™. All rights reserved. Confidential and proprietary.
                 </div>
             </div>
         </div>

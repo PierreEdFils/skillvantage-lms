@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillVantage Sign Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
 
@@ -17,6 +18,16 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #001f3f 0%, #f8f9fa 100%);
             min-height: 100vh;
+        }
+
+        #particle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .font-display {
@@ -40,6 +51,7 @@
     </style>
 </head>
 <body class="text-gray-900">
+    <div id="particle-bg"></div>
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div class="flex items-center justify-between gap-4 mb-10">
             <a href="index.html" class="flex items-center gap-3">
@@ -337,6 +349,83 @@
 
         updateSummary();
         renderStep();
+    </script>
+
+    <footer class="bg-navy-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display font-bold text-2xl mb-4 text-orange-500">
+                    COREHUB™
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Transforming coaching into measurable growth through AI-powered intelligence.
+                </p>
+                <div class="text-sm text-gray-500">
+                    © 2026 COREHUB™. All rights reserved. Confidential and proprietary.
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        if (typeof p5 !== 'undefined' && document.getElementById('particle-bg')) {
+            const signupParticleSketch = (p) => {
+                const particles = [];
+
+                p.setup = () => {
+                    const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+                    canvas.parent('particle-bg');
+                    canvas.style('position', 'fixed');
+                    canvas.style('top', '0');
+                    canvas.style('left', '0');
+                    canvas.style('z-index', '-1');
+
+                    for (let i = 0; i < 50; i += 1) {
+                        particles.push({
+                            x: p.random(p.width),
+                            y: p.random(p.height),
+                            vx: p.random(-0.5, 0.5),
+                            vy: p.random(-0.5, 0.5),
+                            size: p.random(2, 6)
+                        });
+                    }
+                };
+
+                p.draw = () => {
+                    p.clear();
+
+                    particles.forEach((particle) => {
+                        particle.x += particle.vx;
+                        particle.y += particle.vy;
+
+                        if (particle.x < 0) particle.x = p.width;
+                        if (particle.x > p.width) particle.x = 0;
+                        if (particle.y < 0) particle.y = p.height;
+                        if (particle.y > p.height) particle.y = 0;
+
+                        p.fill(255, 102, 0, 100);
+                        p.noStroke();
+                        p.circle(particle.x, particle.y, particle.size);
+                    });
+
+                    for (let i = 0; i < particles.length; i += 1) {
+                        for (let j = i + 1; j < particles.length; j += 1) {
+                            const dist = p.dist(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                            if (dist < 100) {
+                                p.stroke(255, 102, 0, 50 * (1 - dist / 100));
+                                p.strokeWeight(1);
+                                p.line(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                            }
+                        }
+                    }
+                };
+
+                p.windowResized = () => {
+                    p.resizeCanvas(p.windowWidth, p.windowHeight);
+                };
+            };
+
+            new p5(signupParticleSketch);
+        }
     </script>
 </body>
 </html>
