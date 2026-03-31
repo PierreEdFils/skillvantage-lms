@@ -93,10 +93,43 @@
             flex-shrink: 0;
             color: var(--orange);
             font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1.2rem;
             font-weight: 700;
             letter-spacing: 0.01em;
             white-space: nowrap;
+            margin-right: 1.4rem;
+        }
+
+        .brand-lockup {
+            display: inline-flex;
+            align-items: flex-end;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .brand-lockup .brand-core {
+            font-size: 1em;
+            font-weight: 700;
+            letter-spacing: 0;
+            line-height: 1;
+        }
+
+        .brand-lockup .brand-hub {
+            font-size: 0.42em;
+            font-weight: 700;
+            letter-spacing: 0;
+            line-height: 1;
+            align-self: flex-end;
+            margin-bottom: 0.05em;
+        }
+
+        .brand-lockup .brand-tm {
+            font-size: 0.22em;
+            font-weight: 700;
+            letter-spacing: 0;
+            line-height: 1;
+            align-self: flex-start;
+            margin-top: 0.1em;
         }
         
         .nav-item::after {
@@ -201,12 +234,19 @@
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
         <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center min-h-24 gap-4 lg:gap-6 py-3">
+            <div class="flex justify-between items-center min-h-[4.75rem] gap-3 lg:gap-4 py-1.5">
                 <!-- Logo -->
-                <div class="flex items-center">
+                <div class="flex items-center shrink-0 -translate-y-1">
                     <!-- Make logo clickable to return home -->
-                    <a href="index.html" class="flex items-center space-x-2 font-display font-bold text-xl text-navy-900 shrink-0">
-                        <img src="/resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-11 lg:h-12 w-auto">
+                    <a href="index.html" aria-label="Go to dashboard" title="Go to dashboard" class="flex items-center gap-2 font-display font-bold text-xl text-navy-900 shrink-0">
+                        <img src="resources/skillvantage_logo.png" alt="SkillVantage Logo" class="h-11 lg:h-12 w-auto">
+                        <span class="header-brand-mark">
+                            <span class="brand-lockup" aria-label="COREHUB trademark">
+                                <span class="brand-core">CORE</span>
+                                <span class="brand-hub">HUB</span>
+                                <span class="brand-tm">TM</span>
+                            </span>
+                        </span>
                         <!--
                         <span>SkillVantage</span> <span class="text-orange-500">Enterprise</span>
 -->
@@ -214,9 +254,8 @@
                 </div>
                 
                 <!-- Navigation Items -->
-                <div class="hidden md:flex items-center justify-center gap-x-1 gap-y-2 lg:gap-x-2 xl:gap-x-3 flex-1 flex-wrap min-w-0 px-2">
-                    <span class="header-brand-mark px-3 py-2">COREHUB™</span>
-                    <a href="index.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Dashboard</a>
+                <div class="hidden md:flex items-center justify-center gap-x-1 lg:gap-x-2 xl:gap-x-3 flex-1 min-w-0 translate-y-1">
+                    <a href="index.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Home</a>
                     <a href="coaching-products.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Coaching Products</a>
                     <a href="training-modules.html" class="nav-item header-nav-link text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">Learning Management System</a>
                     <a href="coachhub.html" class="nav-item header-nav-link active text-gray-700 hover:text-orange-500 px-3 py-2 text-sm lg:text-[15px] font-medium">CoachHub</a>
@@ -561,14 +600,18 @@
     <footer class="bg-navy-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <div class="font-display font-bold text-2xl mb-4 text-orange-500">
-                    COREHUB™
+                <div class="font-display font-bold text-3xl mb-4 text-orange-500">
+                    <span class="brand-lockup" aria-label="COREHUB trademark">
+                        <span class="brand-core">CORE</span>
+                        <span class="brand-hub">HUB</span>
+                        <span class="brand-tm">TM</span>
+                    </span>
                 </div>
-                <p class="text-gray-400 mb-6">
+                <p class="text-black mb-6">
                     Transforming coaching into measurable growth through AI-powered intelligence.
                 </p>
-                <div class="text-sm text-gray-500">
-                    © 2026 COREHUB™. All rights reserved. Confidential and proprietary.
+                <div class="text-sm text-black">
+                    © 2026 COREHUBTM. All rights reserved. Confidential and proprietary.
                 </div>
             </div>
         </div>
